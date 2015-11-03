@@ -140,6 +140,7 @@
            .pipe($.useref())
            .pipe($.if('*.js', $.ngAnnotate()))
            .pipe($.if('*.js', $.uglify({ preserveComments: 'some' })))
+           .pipe($.injectVersion())
            .pipe(gulp.dest(config.destination))
            .pipe($.size({ title: 'compiled' }));
     }
