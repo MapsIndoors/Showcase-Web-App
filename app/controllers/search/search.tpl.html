@@ -1,0 +1,51 @@
+<section class="search">
+    <header>
+        <nav>
+            <md-button class="md-icon-button" aria-label="Return to search result" ng-click="goto('/:venue/search')" ng-if="query.q || query.categories">
+                <md-icon>&#xE5C4;</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Return to search result" ng-click="goto('/')" ng-if="!query.q && !query.categories">
+                <md-icon>&#xE7F1;</md-icon>
+            </md-button>
+        </nav>
+        <h1 class="title">{{venueName}}</h1>
+        <img ng-src="{{headerImage}}" height="171" />
+    </header>
+    <md-toolbar layout="row" style="align-items: center">
+        <md-icon style="display:inline-block;">&#xE8B6;</md-icon>
+        <md-input-container md-no-float class="md-subhead">
+            <input ng-model="query.q"
+                   placeholder="{{query.categories ? 'Search in ' + categories[query.categories.toUpperCase()].name : 'Search places'}}"
+                   ng-change="getLocations()"
+                   ng-focus="showHeader=false"
+                   ng-blur="showHeader=true"
+                   type="text">
+        </md-input-container>
+        <md-icon style="display:inline-block;" ng-click="clear()">&#xE14C;</md-icon>
+    </md-toolbar>
+    <content flex>
+        <div class="progress" ng-show="loading">
+            <md-progress-circular md-diameter="30px" md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <md-list class="results" ng-if="query.q || query.categories">
+            <md-list-item ng-show="items().length === 0 && !loading">
+                <span class="error">No match!</span>
+            </md-list-item>
+            <md-list-item class="poi-item" ng-repeat="item in items()" ng-click="select(item)">
+                <div class="icon"><img class="material-icons" ng-src="{{getIcon(item)}}" /></div>
+                <div class="md-list-item-text">
+                    <span class="title">{{item.properties.name}}</span>
+                    <span class="sub_title"><i>{{item.properties.venue}}, {{item.properties.building}}, {{item.properties.floorName}}</i></span>
+                </div>
+            </md-list-item>
+        </md-list>
+        <md-list class="menu" ng-if="!query.q && !query.categories">
+            <md-list-item ng-repeat="(key, category) in categories" ng-click="select(category)">
+                <span class="icon"><img class="material-icons" ng-src="{{category.iconUrl}}" /></span>
+                <div class="md-list-item-text">
+                    <span class="title">{{category.name}}</span>
+                </div>
+            </md-list-item>
+        </md-list>
+    </content>
+</section>

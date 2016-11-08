@@ -1,0 +1,52 @@
+﻿@import "theme.less";
+
+.mapsindoors.floor-selector {
+    margin: 5px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.4);
+    border-radius: 4px;
+}
+
+.mapsindoors.floor-selector a {
+    font-weight: bold;
+    position: relative;
+    display: block;
+    float: none;
+    padding: 6px 12px;
+    margin-top: -1px;
+    line-height: 200%;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #fff;
+    color: #555;
+    z-index: 0;
+}
+
+.mapsindoors.floor-selector a:hover {
+    background: @C100;
+    border-color: #999;
+    z-index: 2;
+}
+
+.mapsindoors.floor-selector a.active {
+    background: @Primary;
+    border-color: #00b1ff;
+    color: #fff;
+    z-index: 2;
+}
+
+.mapsindoors.floor-selector a:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.mapsindoors.floor-selector a:first-child:not(:last-child) {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.mapsindoors.floor-selector a:last-child:not(:first-child) {
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}

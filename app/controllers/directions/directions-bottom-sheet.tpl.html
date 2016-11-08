@@ -1,0 +1,15 @@
+<md-bottom-sheet ng-cloak layout="column">
+    <header layout="row">
+        <h3>Route to {{fields.destination}}</h3>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="closeHorizontalDirections()"><md-icon>close</md-icon></md-button>
+    </header>
+    <content class="horizontal-directions" layout="row">
+        <route-leg ng-repeat="leg in legs" ng-click="setLeg($index)" ng-class="{selected: $index==getLeg()}"></route-leg>
+    </content>
+    <footer ng-if="legs.length > 0" layout="row">
+        <md-button class="md-raised" ng-disabled="isFirstLeg()" ng-click="prevLeg()">Previous</md-button>
+        <div flex></div>
+        <md-button class="md-raised md-accent" ng-disabled="isLastLeg()" ng-click="nextLeg()">Next</md-button>
+    </footer>
+</md-bottom-sheet>

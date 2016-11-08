@@ -1,0 +1,126 @@
+﻿@import "theme.less";
+
+md-sidenav {
+    overflow: hidden;
+    height: 100%;
+
+    > ng-view {
+        height: 100%;
+    }
+
+    md-toolbar {
+
+        i.material-icons {
+            margin-right: 16px;
+        }
+    }
+
+    header {
+        position: relative;
+        height: 171px;
+        min-height: 170px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        transition: all ease .4s;
+
+        img {
+            z-index: -999;
+            height: 220px;
+        }
+
+        h1.title {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            padding-left: 16px;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 64px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            color: #fff;
+            padding: 0 2px;
+        }
+
+        nav md-icon {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+    }
+
+
+
+    section > .md-icon-button:first-child {
+        //margin: 0;
+    }
+
+    content {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+
+        .progress {
+            display: flex;
+            padding: 16px;
+            justify-content: center;
+        }
+    }
+
+    footer {
+        display: flex;
+        min-height: 64px;
+        justify-content: center;
+        align-items: center;
+
+
+        nav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin: 0 16px;
+
+            span {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+
+            span:first-child {
+                justify-content: flex-start;
+            }
+
+            span:last-child {
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 350px) {
+    md-sidenav {
+        .search {
+            header {
+                height: 0px;
+                min-height: 0px;
+            }
+        }
+    }
+}
