@@ -1,0 +1,202 @@
+﻿@import "theme.less";
+@-moz-keyframes slide_up {
+    to {
+        height: 0px;
+    }
+}
+
+@-webkit-keyframes slide_up {
+    to {
+        height: 0px;
+    }
+}
+
+@keyframes slide_up {
+    to {
+        height: 0px;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.gm-style-iw+div {
+    display: none;
+}
+
+.gm-style-iw {
+    text-align: center;
+}
+
+ul.tiles {
+    display: block;
+    padding: 2px;
+    margin: 0;
+    width: 100%;
+    /*height: 100%;*/
+}
+
+ul.tiles li {
+    display: block;
+    padding: 3px;
+}
+
+ul.tiles li a {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 135px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+ul.tiles li h1.md-title {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding-left: 16px;
+    color: #fff;
+    line-height: 36px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+ul.tiles li:hover a img {
+    transform: scale(1.05) translateZ(0);
+}
+
+ul.tiles li a img {
+    z-index: -1;
+    height: 180px;
+    transition: 0.3s ease;
+    transform: translateZ(0);
+}
+
+.mapsindoors .controls {
+    margin: 16px;
+}
+
+.md-errors-spacer {
+    display: none;
+}
+
+md-icon:focus {
+    outline: 0;
+}
+
+md-icon[ng-click] {
+    cursor: pointer;
+}
+
+#google-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#google-map .infowindow a b {
+    color: #43aaa0;
+    cursor: pointer;
+}
+
+md-list-item span.error {
+    font-style: italic;
+    color: @DisabledText;
+}
+
+list-item,
+list-item ng-include {
+    display: flex;
+}
+
+list-item .list-item-text,
+md-list-item .md-list-item-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 60px;
+    margin-left: 16px;
+    justify-content: center;
+}
+
+list-item list-item span.title,
+md-list-item .md-list-item-text span.title {
+    font-size: 16px;
+    line-height: normal;
+}
+
+md-list-item .md-list-item-text span.sub_title {
+    font-size: 11px;
+    line-height: normal;
+    margin: 5px 0 0;
+}
+
+md-list-item .icon {
+    display: flex;
+    max-height: 40px;
+    width: 40px;
+    line-height: 0;
+}
+
+md-list-item .icon img {
+    max-height: 40px;
+    max-width: 40px;
+    vertical-align: text-top;
+    margin: auto;
+}
+
+md-toolbar md-input-container {
+    padding: 0;
+}
+
+md-sidenav md-content {
+    padding: 0 16px;
+}
+
+.md-button[disabled] {
+    cursor: default;
+}
+
+.share-location-dialog md-input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    input {
+        color: rgba(0, 0, 0, .87);
+        border: 1px solid rgba(0, 0, 0, .25);
+    }
+}
+
+.feedback-url,
+feedback-url:visited {
+    color: darken(@Accent, 20%);
+    text-decoration: none;
+    text-align: left;
+    width: 100%;
+    padding: 0 0 0 16px;
+    &:hover {
+        color: @Accent;
+    }
+}
+
+.md-button {
+    line-height: 32px;
+    min-height: 32px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.8);
+}

@@ -1,0 +1,252 @@
+﻿@import "theme.less";
+
+md-sidenav {
+    overflow: hidden;
+    height: 100%;
+
+    > ng-view {
+        height: 100%;
+    }
+
+    md-toolbar {
+
+        i.material-icons {
+            margin-right: 16px;
+        }
+    }
+
+    header {
+        position: relative;
+        height: 171px;
+        min-height: 170px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        transition: all ease .4s;
+
+        img {
+            z-index: -999;
+            height: 220px;
+        }
+
+        h1.title {
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            padding-left: 16px;
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            align-items: center;
+
+            img {
+                height: 36px;
+                width: 36px;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 56px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            color: #fff;
+            padding: 0 2px;
+        }
+
+        nav md-icon {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        &:not(.search):before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0),rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.2));
+            opacity: .5;
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+    }
+
+
+
+    section > .md-icon-button:first-child {
+        //margin: 0;
+    }
+
+    content {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+
+        .address, .description, .aliases {
+            /*margin: 0px 16px;*/
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .material-icons {
+                font-size: 40px;
+                color: #555;
+                width: 40px;
+                align-self: flex-start;
+                margin-top: 5px;
+            }
+
+            p {
+                margin-left: 16px;
+                font-size: 16px;
+            }
+        }
+
+        .hint {
+            display: flex;
+            text-align: center;
+            font-size: 100%;
+            line-height: 150%;
+            color: rgb(160, 160, 160);
+            flex-direction: column;
+            min-height: 64px;
+            padding: 8px 16px 0 16px;
+            justify-content: center;
+
+            p {
+                margin: 0;
+            }
+
+            &::before {
+                font-family: 'Material Icons';
+                font-size: 96px;
+                line-height: 100%;
+                display: block;
+                visibility: visible;
+            }
+
+            &.warning::before {
+                content: 'warning';
+            }
+
+            &.error::before {
+                content: 'error';
+            }
+
+            &.search::before {
+                content: 'search';
+            }
+
+            &.info::before {
+                content: 'info';
+            }
+        }
+
+        md-list-item.hint {
+            padding: 0 16px;
+        }
+
+        .address, .description {
+            span {
+                display: block;
+            }
+        }
+
+        .progress {
+            display: block;
+            padding: 16px;
+            text-align: center;
+
+            md-progress-circular {
+                margin: auto;
+            }
+        }
+
+        .ellipsis {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 220px;
+            overflow: hidden;
+        }
+
+        h2.title {
+            font-size: 16px;
+            font-weight: normal;
+            color: darken(@Accent, 20%);
+            text-decoration: none;
+            text-align: left;
+            width: 100%;
+            padding: 0 0 0 16px;
+            margin: 6px 0;
+        }
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        nav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin: 10px 16px;
+
+            span {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+
+                > button.md-button {
+                    display: flex;
+                    font-weight: normal;
+                    /*text-transform: capitalize;*/
+                    i.material-icons {
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            > span:first-child {
+                justify-content: flex-start;
+            }
+
+            > span:last-child {
+                justify-content: flex-end;
+            }
+        }
+
+        img.powered-by-google {
+            width: 30%;
+            margin: 5px;
+        }
+    }
+}
+
+@media screen and (max-height: 350px) {
+    md-sidenav {
+        .search {
+            header {
+                height: 0px;
+                min-height: 0px;
+            }
+        }
+    }
+}

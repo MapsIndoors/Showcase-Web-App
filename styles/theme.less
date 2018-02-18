@@ -1,0 +1,148 @@
+﻿@import "main.less";
+@import "sidenav.less";
+@import "floor-selector.less";
+@import "directions.less";
+@import "controllers/venues.controller.less";
+@import "controllers/directions.controller.less";
+@import "shared/about.less";
+@import "return-to-venue.less";
+@import "zoom-for-more-details.less";
+@Primary: #49A842;
+@C50: tint(@Primary, 87.5%);
+@C100: tint(@Primary, 69.5%);
+@C200: tint(@Primary, 50%);
+@C300: tint(@Primary, 30%);
+@C400: tint(@Primary, 15%);
+@C500: @Primary;
+@C600: #1E88E5;
+@C700: #1976D2;
+@C800: #1565C0;
+@C900: #0D47A1;
+@Accent: #f5a623;
+@PrimaryText: rgba(255, 255, 255, 1);
+@SecondaryText: rgba(255, 255, 255, 0.875);
+@DisabledText: rgba(255, 255, 255, 0.55);
+@SecondaryButton: #d1d1d1;
+// @Primary: #2196F3;
+// @C50: #E3F2FD;
+// @C100: #BBDEFB;
+// @C200: #90CAF9;
+// @C300: #64B5F6;
+// @C400: #42A5F5;
+// @C500: #2196F3;
+// @C600: #1E88E5;
+// @C700: #1976D2;
+// @C800: #1565C0;
+// @C900: #0D47A1;
+// @Accent: #F44336;
+// @PrimaryText: rgba(255,255,255,1);
+// @SecondaryText: rgba(255,255,255, 0.875);
+// @DisabledText: rgba(255,255,255, 0.55);
+// @SecondaryButton: #fff;
+md-toolbar:not(.md-menu-toolbar) {
+    background-color: @Primary;
+    color: @PrimaryText;
+}
+
+md-progress-circular path {
+    stroke: @Primary;
+}
+
+.md-button.md-accent.md-raised,
+.md-button.md-accent.md-fab {
+    background-color: @Accent;
+}
+
+.md-button.md-accent.md-raised:not([disabled]):hover,
+.md-button.md-accent.md-fab:not([disabled]):hover {
+    background-color: tint(@Accent, 30%);
+}
+
+.md-button.md-raised {
+    background-color: @SecondaryButton;
+}
+
+.md-button.md-raised:not([disabled]):hover {
+    background-color: tint(@SecondaryButton, 30%);
+}
+
+input::-webkit-input-placeholder,
+md-input-container .md-input::-webkit-input-placeholder {
+    color: @DisabledText;
+}
+
+input::-moz-placeholder,
+md-input-container .md-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: @DisabledText;
+}
+
+input:-ms-input-placeholder,
+md-input-container :-ms-input-placeholder.md-input {
+    color: @DisabledText;
+}
+
+::-ms-clear {
+    display: none;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    color: @PrimaryText;
+    border-color: #fff;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input[readonly],
+md-input-container .md-input[readonly] {
+    padding-bottom: 2px;
+    color: @C100;
+    border-bottom: 1px @C100 dashed;
+}
+
+md-input-container .md-input {
+    color: @SecondaryText;
+    border-color: @C100;
+}
+
+.search md-toolbar {
+    padding: 0 16px;
+}
+
+.search-field {
+    background: rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    border: 0;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+    color: @SecondaryText;
+    >input {
+        background: 0;
+        border: 0;
+        width: 100%;
+        height: 100%;
+        color: @SecondaryText;
+        &:focus {
+            outline: 0;
+        }
+    }
+    >i.material-icons {
+        margin: 6px;
+        cursor: pointer;
+        font-size: 21px;
+        
+        &:focus {
+            outline: 0;
+        }
+    }
+    &::before {
+        font-family: 'Material Icons';
+        content: '\E8B6';
+        font-size: 22px;
+        float: left;
+        margin: 6px;
+    }
+}

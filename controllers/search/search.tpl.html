@@ -1,0 +1,61 @@
+<section class="search">
+    <header>
+        <nav>
+            <md-button class="md-icon-button" aria-label="Return to search result" ng-click="goto('/:venue/search')" ng-if="query.q || query.categories">
+                <md-icon>&#xE5C4;</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Return to search result" ng-click="goto('/')" ng-if="!query.q && !query.categories">
+                <md-icon>&#xE7F1;</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="App information" ng-click="about()">
+                <md-icon>&#xE88F;</md-icon>
+            </md-button>
+        </nav>
+        <h1 class="title">{{venueName}}</h1>
+        <img ng-src="{{headerImage}}" height="171" />
+    </header>
+    <md-toolbar layout="row" style="align-items: center">
+        <div class="search-field">
+            <input ng-model="query.q" placeholder="{{query.categories ? 'Search in ' + categories[query.categories.toUpperCase()].name : 'Search places'}}"
+            ng-change="getLocations()" ng-focus="onFocus()" ng-blur="onBlur()" ng-keypress="onKeypress($event)" type="text" />
+            <i class="material-icons" ng-show="query.q > ''" ng-click="clear()">&#xE5C9;</i>
+        </div>
+        <!-- <md-icon style="display:inline-block;">&#xE8B6;</md-icon>
+        <md-input-container md-no-float class="md-subhead">
+            <input ng-model="query.q" placeholder="{{query.categories ? 'Search in ' + categories[query.categories.toUpperCase()].name : 'Search places'}}"
+                ng-change="getLocations()" ng-focus="onFocus()" ng-blur="onBlur()" ng-keypress="onKeypress($event)" type="text">
+        </md-input-container>
+        <md-icon style="display:inline-block;" ng-click="clear()">&#xE14C;</md-icon> -->
+    </md-toolbar>
+    <content flex id="content">
+        <div class="search hint" ng-if="showHint">
+            <p>Use the search to search across {{title}}.</p>
+        </div>
+        <md-list class="results" ng-if="query.q || query.categories">
+            <md-list-item ng-show="items().length === 0 && !loading" class="search hint">
+                <p ng-if="query.categories && !query.q" ng-bind-html="trustAsHtml(venueName + ' has no ' + categories[query.categories.toUpperCase()].name + '. <br> Use search to find ' + categories[query.categories.toUpperCase()].name + ' across ' + title + '.')"></p>
+                <p ng-if="query.q">{{ 'No matches for: "' + query.q +'"' }}</p>
+            </md-list-item>
+            <md-list-item class="poi-item" ng-repeat="item in items()" ng-click="select(item)" aria-label="{{item.properties.name}}">
+                <list-item location="item"></list-item>
+            </md-list-item>
+        </md-list>
+
+        <md-list class="menu" ng-if="!query.q && !query.categories && !showHint">
+            <md-list-item ng-repeat="(key, category) in categories" ng-click="select(category)">
+                <span class="icon">
+                    <img class="material-icons" ng-src="{{category.iconUrl}}" />
+                </span>
+                <div class="md-list-item-text">
+                    <span class="title">{{category.name}}</span>
+                </div>
+            </md-list-item>
+        </md-list>
+        <div class="progress" ng-if="loading">
+            <md-progress-circular md-diameter="30px" md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </content>
+    <footer ng-if="feedbackUrl">
+        <a class="feedback-url" ng-href="{{feedbackUrl}}" href="" target="_blank">Please give us your feedback</a>
+    </footer>
+</section>

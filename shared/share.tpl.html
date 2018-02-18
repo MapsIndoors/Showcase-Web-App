@@ -1,0 +1,22 @@
+﻿<md-dialog aria-label="Share location">
+    <form>
+        <md-dialog-content>
+            <div class="md-dialog-content share-location-dialog">
+                <h2>Share location</h2>
+                <p>Copy the link below to share the location of  {{location.properties.name}}</p>
+                <md-input-container md-no-float>
+                    <md-button class="md-icon-button" style="display: inline-block;" ng-click="copy()">
+                        <md-icon>&#xE14D;</md-icon>
+                    </md-button>
+                    <input id="share-location-link" type="text" value="{{url}}" readonly title="{{url}}" aria-label="share location link">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="hide()" style="margin-right:20px;">
+                Close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog> 

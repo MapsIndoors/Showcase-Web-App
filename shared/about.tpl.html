@@ -1,0 +1,41 @@
+﻿<md-dialog aria-label="About">
+    <md-dialog-content class="about-dialog">
+        <div style="margin: 16px;">
+            <h1 style="text-align: center; font-size: larger;">About</h1>
+            <section>
+                <h2>App Name</h2>
+                <p>{{TITLE}}</p>
+            </section>
+            <section>
+                    <h2>Supplier:</h2>
+                    <p><a href="https://www.mapspeople.com">MapsPeople A/S</a></p>
+                </section>
+            <section>
+                <h2>App Version</h2>
+                <p>{{APP_VERSION}} ({{BUILD_DATE}})</p>
+            </section>
+            <section>
+                <h2>SDK Version:</h2>
+                <p>{{SDK_VERSION}}</p>
+            </section>
+            <section>
+                <h2>User agent:</h2>
+                <p>{{USER_AGENT}}</p>
+            </section>
+
+            <!-- <table style="width: 600px;">
+                <tr>
+                    <td style="width: 25%">MapsIndoors APP:</td>
+                    <td> ()</td>
+                </tr>
+                <tr>
+                    <td>MapsIndoors SDK:</td>
+                    <td>{{SDK_VERSION}}</td>
+                </tr>
+                <tr>
+                   
+                </tr>
+            </table> -->
+        </div>
+    </md-dialog-content>
+</md-dialog>

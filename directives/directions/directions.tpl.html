@@ -1,0 +1,133 @@
+﻿<div class="direction-panel">
+    <div class="direction-panel-inner">
+        <p class="route-total discreet">{{durationAsText(totalDuration)}} to destination ({{distanceAsText(totalDistance)}})</p>
+        <div ng-repeat="leg in data.legs" travel-mode="{{data.travelMode}}">
+            <div ng-if="leg._mi.type === 'google.maps.DirectionsLeg' && leg.departure_time">
+                <div class="no-outline" ng-repeat="step in leg.steps" ng-click="setSegment(step.index)">
+                    <div ng-if="step.travel_mode === 'TRANSIT'" ng-include="'directives/directions/transit.tpl.html'"></div>
+                    <div ng-if="step.travel_mode === 'WALKING'" ng-include="'directives/directions/walking.tpl.html'"></div>
+                </div>
+            </div>
+            <div class="no-outline" ng-if="leg._mi.type === 'google.maps.DirectionsLeg' && !leg.departure_time" ng-click="setSegment(leg.index)">
+                <div class="dir-section {{ ACTION_CLASS }}" ng-class="{'start': $index === 0, 'end': $index === (data.legs.length -1), 'selected': leg.index == currentIndex}">
+                    <span ng-if="$index === 0" class="indicator top start"></span>
+                    <h2 class="origin" ng-if="$index === 0" title="{{startLabel($index)}}">
+                        <span class="action">Start:</span> {{startLabel($index)}}</h2>
+                    <div class="indoor" ng-if="$index > 0 && leg.steps[0].abutters.toLowerCase().includes('outside')">
+                        <div class="icon-container">
+                            <span class="miIcon ico-exit" />
+                        </div>
+                    </div>
+                    <h2 class="exit-building" ng-if="$index > 0 && leg.steps[0].abutters.toLowerCase().includes('outside')" ng-bind-html="trustAsHtml(leg.steps[0].instructions)"></h2>
+                    <div class="dots"></div>
+                    <div class="transit-line"></div>
+                    <div class="instructions">
+                        <div>
+                            <span class="icon">
+                                <md-icon ng-bind-html="ACTION_ICON"></md-icon>
+                            </span>
+                            <span class="action">{{ ACTION_TEXT }} </span>
+                            <span>{{distanceAsText(leg.distance.value)}}
+                                <span ng-if="durationAsText(leg.duration.value) != ''">({{durationAsText(leg.duration.value)}})</span>
+                            </span>
+                            <div class="steps-instructions" ng-if="leg.steps.length > 0">
+                                <p class="expander" ng-click="toggle($index)">
+                                    <span class="icon">
+                                        <md-icon ng-show="expanded !== $index">&#xE313;</md-icon>
+                                        <md-icon ng-show="expanded === $index">&#xE316;</md-icon>
+                                    </span> Directions</p>
+                                <div ng-show="expanded === $index">
+                                    <div class="substeps" ng-repeat="substep in leg.steps">
+                                        <span class="adp-maneuver {{substep.maneuver}}"></span>
+                                        <p ng-bind-html="trustAsHtml(substep.instructions)"></p>
+                                        <span class="distance">{{distanceAsText(substep.distance.value)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span ng-if="$index == (data.legs.length -1)" ng-style="endIcon" ng-class="{'end-icon': endIcon}" class="indicator bottom end">
+                        <span class="dot"></span>
+                    </span>
+                    <h2 class="destination" title="{{endLabel($index)}}" ng-if="$index == (data.legs.length -1)">
+                        <span class="action">End: </span>{{endLabel($index)}}</h2>
+                </div>
+            </div>
+            <div class="no-outline" ng-if="leg._mi.type === 'mapsindoors.DirectionsLeg'" ng-click="setSegment(leg.index)">
+                <div class="dir-section foot" ng-class="{'start': $index === 0, 'end': $index === (data.legs.length -1), 'selected': leg.index == currentIndex}">
+                    <h2 class="origin" ng-if="$index == 0" title="{{startLabel($index)}}">
+                        <span class="action">Start:</span> {{startLabel($index)}}</h2>
+                    <span ng-if="$index === 0" class="indicator top"></span>
+                    <div class="indoor" ng-class="{'dots': leg.steps[0].abutters.toLowerCase().includes('outside')}">
+                        <div class="icon-container" ng-if="$index > 0">
+                            <!--<span class="miIcon ico-lift" ng-if="leg.steps[0].highway == 'elevator' && data.legs[$index - 1]._mi.type == leg._mi.type"></span>
+                            <span class="miIcon ico-stairs" ng-if="['steps','stairs'].indexOf(leg.steps[0].highway) > -1 && data.legs[$index - 1]._mi.type == leg._mi.type"></span>
+                            <span class="miIcon ico-enter" ng-if="data.legs[$index - 1]._mi.type !== leg._mi.type || (data.legs[$index - 1].steps.last().abutters.toLowerCase().indexOf('outside') > -1 && leg.steps[0].abutters.toLowerCase().indexOf('inside') > -1)"></span>
+                            <span class="miIcon ico-exit" ng-if="data.legs[$index - 1].steps.last().abutters.toLowerCase().indexOf('inside') > -1 && leg.steps[0].abutters.toLowerCase().indexOf('outside') > -1"></span>
+                            <span class="icon" ng-if="leg.steps[0].highway == 'place'">&#xE55F;</span>-->
+                            <span class="miIcon ico-lift" ng-if="leg.steps[0].instructions.toLowerCase().indexOf('elevator') > -1"></span>
+                            <span class="miIcon ico-stairs" ng-if="leg.steps[0].instructions.toLowerCase().indexOf('stairs') > -1 || leg.steps[0].instructions.toLowerCase().indexOf('steps') > -1"></span>
+                            <span class="miIcon ico-enter" ng-if="leg.steps[0].instructions.toLowerCase().indexOf('enter') > -1"></span>
+                            <span class="miIcon ico-exit" ng-if="leg.steps[0].instructions.toLowerCase().indexOf('exit') > -1"></span>
+                            <span class="icon" ng-if="leg.steps[0].highway == 'place'">&#xE55F;</span>
+                        </div>
+                    </div>
+                    <h2 class="depart" ng-if="$index > 0" ng-bind-html="trustAsHtml(leg.steps[0].instructions)"></h2>
+                    <div class="instructions">
+                        <span class="icon">
+                            <md-icon>&#xE536;</md-icon>
+                        </span>
+                        <span class="action">Walk </span>
+                        <span>{{distanceAsText(leg.distance.value)}}
+                            <span ng-if="durationAsText(leg.duration.value) != ''">({{durationAsText(leg.duration.value)}})</span>
+                        </span>
+                        <div class="steps-instructions" ng-if="leg.steps.length > 0">
+                            <p class="expander" ng-click="toggle($index)">
+                                <span class="icon">
+                                    <md-icon ng-show="expanded !== $index">&#xE313;</md-icon>
+                                    <md-icon ng-show="expanded === $index">&#xE316;</md-icon>
+                                </span> Directions</p>
+                            <div ng-show="expanded === $index">
+                                <div class="substeps" ng-repeat="substep in leg.steps">
+                                    <span class="adp-maneuver {{substep.maneuver}}"></span>
+                                    <p ng-bind-html="trustAsHtml(substep.instructions)"></p>
+                                    <span class="distance">{{distanceAsText(substep.distance.value)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <span ng-if="$index == (data.legs.length -1)" class="indicator bottom" ng-style="endIcon" ng-class="{'end-icon': endIcon}">
+                        <span class="dot"></span>
+                    </span>
+                    <h2 class="destination" title="{{endLabel(endIndex -1)}}" ng-if="$index == (data.legs.length -1)">
+                        <span class="action">End: </span>{{endLabel(endIndex -1)}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="agencies" ng-if="agencies.length > 0">
+            <a href="#" ng-click="showAgencyInfo(true)">Agency Info ({{agencies.length}})</a>
+            {{showAgencyInfo}}
+        </div>
+    </div>
+    <div class="direction-navigation-panel">
+        <md-button class="md-raised" ng-disabled="currentIndex == 0" ng-click="prevSegment()">Previous</md-button>
+        <md-button class="md-raised md-accent" ng-disabled="currentIndex == endIndex - 1" ng-click="nextSegment()">Next</md-button>
+    </div>
+</div>
+<div class="agency-info" ng-if="agencyInfoVisible">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" ng-click="showAgencyInfo(false)">
+                <md-icon>&#xE5C4;</md-icon>
+            </md-button>
+            <h1>Agency Info</h1>
+        </div>
+    </md-toolbar>
+    <ul>
+        <li ng-repeat="agency in agencies">
+            <h1>{{agency.name}}</h1>
+            <div ng-if="agency.phone"><span>Phone</span><span>{{agency.phone}}</span></div>
+            <div ng-if="agency.url"><span>Website</span><span><a href="{{agency.url}}" target="_blank">{{agency.website.protocol}}//{{agency.website.hostname}}</a></span></div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,193 @@
+﻿@import "../theme.less";
+md-sidenav {
+    .route {
+        height: 100%;
+        header.search {
+            flex-direction: column;
+            position: relative;
+            background: @Primary; //padding: 0 0 18px 0;
+            nav {
+                justify-content: flex-start;
+                display: flex;
+                min-height: 64px;
+                align-items: center;
+                position: relative;
+            }
+            md-icon {
+                color: #fff;
+                text-shadow: none;
+            }
+            .switch-direction {
+                // position: absolute;
+                // right: 0;
+                // top: 76px;
+                margin: 0;
+            }
+            .travelmode {
+                position: relative;
+                left: 40px;
+            }
+            .travelmode .md-icon-button {
+                margin: 0;
+            }
+            .travelmode .md-icon-button md-icon {
+                color: @C100;
+            }
+            .travelmode .md-icon-button.active md-icon {
+                color: #fff;
+            }
+            .search-controls {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                padding: 0 0 0 12px;
+            }
+            .searchbox-container {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                >.dots {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    flex: 0;
+                    background: @SecondaryText;
+                    background: -webkit-repeating-radial-gradient( center center, @SecondaryText, @SecondaryText 2px, transparent 2px, transparent 100%);
+                    background: -moz-repeating-radial-gradient( center center, @SecondaryText, @SecondaryText 2px, transparent 2px, transparent 100%);
+                    background: -ms-repeating-radial-gradient( center center, @SecondaryText, @SecondaryText 2px, transparent 2px, transparent 100%);
+                    background: repeating-radial-gradient( center center, @SecondaryText, @SecondaryText 2px, transparent 2px, transparent 100%);
+                    background-size: 8px 8px;
+                    background-position: center 3px;
+                    background-repeat: no-repeat repeat;
+                    width: 10px;
+                    height: 50px;
+                    margin-right: 10px;
+                    >i {
+                        border: 2px solid #fff;
+                        background: @Primary;
+                        border-radius: 50%;
+                        display: block;
+                        height: 10px;
+                        width: 10px;
+                        &:last-child {
+                            border: 0;
+                            &::before {
+                                font-family: 'Material Icons';
+                                content: '\E55F';
+                                left: -3px;
+                                top: -7px;
+                                position: relative;
+                                font-style: normal;
+                                font-size: 16px;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+                >div {
+                    flex: 5;
+                }
+                .search-field {
+                    padding-left: 8px;
+                    &::before {
+                        display: none;
+                    }
+                    &:first-child {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+            .searchbox-container md-input-container {
+                margin: 0;
+                width: 100%;
+                input {
+                    padding-right: 20px;
+                }
+                .material-icons {
+                    color: #fff;
+                    font-size: 18px;
+                    position: absolute;
+                    top: 1px;
+                    line-height: 32px;
+                    right: 0;
+                    margin: 0 2px 0 0;
+                    cursor: pointer;
+                }
+            }
+            .checkbox-container {
+                height: 36px;
+                display: flex;
+                align-items: center;
+                color: rgba(255, 255, 255, 0.85);
+                margin-left: 18px;
+                md-checkbox {
+                    margin: 0 0 0 2px;
+                }
+                .md-icon {
+                    border-color: @C100;
+                }
+            }
+        }
+        ul.network {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid @C100;
+            li.active {
+                border-bottom: 2px solid @C500;
+                md-icon {
+                    color: @C500;
+                }
+            }
+            li:hover {
+                background: @C100;
+            }
+        }
+        md-list.results {
+            .icon md-icon {
+                font-size: 28px;
+                text-align: center;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+    }
+    route-leg {
+        position: relative;
+        display: block;
+        height: 144px;
+        padding: 0 16px;
+    }
+    route-leg:focus,
+    route-leg.selected {
+        background-color: @C200;
+        outline: none;
+    }
+    route-leg:hover {
+        background-color: @C200;
+    }
+    route-leg label {
+        display: block;
+        margin-left: 56px;
+        position: absolute;
+        top: 14px;
+    }
+    route-leg label:last-child {
+        position: absolute;
+        top: 110px;
+    }
+}
+
+.horizontal-directions {
+    overflow-x: auto;
+    route-leg>label {
+        margin: 0 20px 0 20px;
+        float: left;
+    }
+    route-leg>label+label {
+        float: right;
+        margin-left: -80px;
+    }
+}

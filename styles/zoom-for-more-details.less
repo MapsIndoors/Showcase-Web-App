@@ -1,0 +1,29 @@
+﻿@import "theme.less";
+
+.mapsindoors {
+    &.zoom-for-more-details {
+        opacity: 1;
+        height: auto;
+        transition: height .5s linear 0s, opacity 0.5s ease;
+        z-index: 999;
+
+        &.hidden {
+            height: 0;
+            opacity: 0;
+        }
+
+        .md-button {
+            min-width: 200px;
+            max-width: 250px;
+            padding: 0 10px;
+            color: @C300;
+            background-color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: content-box;
+        }
+    }
+}

@@ -1,0 +1,94 @@
+<section class="route">
+    <var class="preload-mapsindoors-icons-font">&#xE900;</var>
+    <header class="search">
+        <nav>
+            <md-button class="md-icon-button" aria-label="Return to search result" ng-click="back()">
+                <md-icon>&#xE5C4;</md-icon>
+            </md-button>
+            <div class="travelmode">
+                <md-button class="md-icon-button" ng-class="{ 'active': travelMode === 'WALKING' }" aria-label="" ng-click="setTravelmode('WALKING')">
+                    <md-icon>&#xE536;</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-class="{ 'active': travelMode === 'BICYCLING' }" aria-label="" ng-click="setTravelmode('BICYCLING')">
+                    <md-icon>&#xE52F;</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-class="{ 'active': travelMode === 'TRANSIT' }" aria-label="" ng-click="setTravelmode('TRANSIT')">
+                    <md-icon>&#xE535;</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-class="{ 'active': travelMode === 'DRIVING' }" aria-label="" ng-click="setTravelmode('DRIVING')">
+                    <md-icon>&#xE531;</md-icon>
+                </md-button>
+            </div>
+        </nav>
+        <div class="search-controls">
+            <div class="searchbox-container md-body-1">
+                <div class="dots">
+                    <i></i>
+                    <i></i>
+                </div>
+                <div>
+                    <div class="search-field">
+                        <input type="text" id="originInput" placeholder="Select origin" ng-focus="onFocus(origin)" ng-model="origin.query" ng-change="find(origin.query)"
+                            ng-keypress="onKeypress($event)" />
+                        <i class="material-icons" ng-if="origin.query.length > 0" ng-click="origin.reset()">&#xE5C9;</i>
+                    </div>
+                    <div class="search-field">
+                        <input type="text" i id="destinationInput" placeholder="Select destination" ng-focus="onFocus(destination)" ng-model="destination.query"
+                            ng-change="find(destination.query)" ng-keypress="onKeypress($event)" />
+                        <i class="material-icons" ng-if="destination.query.length > 0" ng-click="destination.reset()">&#xE5C9;</i>
+                    </div>
+                </div>
+                <md-button class="switch-direction md-icon-button" aria-label="" ng-click="reverse()">
+                    <md-icon>&#xE8D5;</md-icon>
+                </md-button>
+                <!-- <md-input-container md-no-float>
+                    <input type="text" id="originInput" placeholder="Select origin" ng-focus="onFocus(origin)" ng-model="origin.query" ng-change="find(origin.query)"
+                        ng-keypress="onKeypress($event)" />
+                    <i class="material-icons" ng-if="origin.query.length > 0" ng-click="origin.reset()">&#xE14C;</i>
+                </md-input-container> -->
+            </div>
+            <!-- <div class="searchbox-container md-body-1">
+
+                <md-input-container md-no-float>
+                    <input type="text" i id="destinationInput" placeholder="Select destination" ng-focus="onFocus(destination)" ng-model="destination.query"
+                        ng-change="find(destination.query)" ng-keypress="onKeypress($event)" />
+                    <i class="material-icons" ng-if="destination.query.length > 0" ng-click="destination.reset()">&#xE14C;</i>
+                </md-input-container> 
+            </div> -->
+            <div class="checkbox-container md-body-1">
+                <md-checkbox ng-model="avoidStairs" ng-change="onAvoidStairsChange()" aria-label="Avoid stairs?">
+                    Avoid stairs?
+                </md-checkbox>
+            </div>
+
+        </div>
+    </header>
+    <content flex>
+        <div class="progress" ng-show="loading && origin.query.length > 0 && destination.query.length > 0">
+            <md-progress-circular md-diameter="30px" md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <div class="hint warning" ng-if="error && legs.length === 0">
+            {{error}}
+        </div>
+        <div class="hint" ng-if="showHint && !error">
+            Search for locations indoors or outdoors
+        </div>
+        <md-list class="results" ng-if="legs.length === 0 && !error && !loading">
+            <md-list-item ng-repeat="location in current.results" ng-click="select(location)" aria-label="{{location.properties.name}}">
+                <list-item location="location"></list-item>
+            </md-list-item>
+            <md-list-item class="hint search" ng-if="current.results.length === 0 && origin.query.length > 0 && destination.query.length > 0 && !loading">
+                <p>No matching results.</p>
+            </md-list-item>
+        </md-list>
+        <div class="vertical" ng-if="legs.length > 0">
+            <directions></directions>
+        </div>
+    </content>
+    <footer ng-if="showPoweredByGoogle()">
+        <img class="powered-by-google" src="assets/images/powered_by_google_on_white_hdpi.png" />
+    </footer>
+</section>
+<section ng-show="showTravelAgencies">
+
+</section>

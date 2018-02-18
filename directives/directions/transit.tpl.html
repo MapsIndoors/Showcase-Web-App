@@ -1,0 +1,18 @@
+﻿<div class="dir-section TRANSIT" ng-class="{'connect-top': leg.steps[$index -1].travel_mode === 'TRANSIT', 'connect-bottom': leg.steps[$index +1].travel_mode === 'TRANSIT', 'selected': step.index == currentIndex}">
+    <div class="transit-line" ng-style="{'background-color': step.transit.line.color}">
+        <div class="indicator top"></div>
+        <div class="indicator bottom"></div>
+    </div>
+    <h2 class="start" title="{{step.transit.departure_stop.name}}">{{step.transit.departure_stop.name}}</h2>
+    <div class="instructions">
+        <span class="icon">
+            <img ng-if="step.transit.line.vehicle.local_icon" src="{{step.transit.line.vehicle.local_icon}}" />
+            <img ng-if="!step.transit.line.vehicle.local_icon && step.transit.line.vehicle.icon" src="{{step.transit.line.vehicle.icon}}" />
+        </span>
+        <span class="transit-type">
+            <span ng-if="step.transit.line.short_name && step.transit.line.short_name.length > 1" class="line" ng-style="{'background-color': step.transit.line.color, 'color': step.transit.line.text_color}">{{step.transit.line.short_name}}</span><span class="headsign">{{step.transit.headsign}}</span>
+        </span>
+        <p class="discreet">{{step.transit.num_stops}} stop<span ng-if="+step.transit.num_stops > 1">s</span> ({{step.duration.text}})</p>
+    </div>
+    <h2 class="end" title="{{step.transit.arrival_stop.name}}">{{step.transit.arrival_stop.name}}</h2>
+</div>

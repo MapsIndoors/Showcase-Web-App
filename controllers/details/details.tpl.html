@@ -1,0 +1,59 @@
+<header>
+    <nav>
+        <md-button class="md-icon-button" aria-label="Return to search result" ng-click="back()">
+            <md-icon>&#xE5C4;</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="share()" ng-if="displayShareButton()">
+            <md-icon>&#xE80D;</md-icon>
+        </md-button>
+    </nav>
+    <h1 class="title"><i class="icon"><img class="material-icons" ng-src="{{getIcon()}}" /></i>{{location.properties.name}}</h1>
+    <img ng-src="{{location.properties.fields.imageurl.value || venue.image }}" />
+</header>
+<content flex>
+    <md-content class="aliases" ng-if="displayAliases && location.properties.aliases && location.properties.aliases.length > 0">
+        <i class="material-icons">stars</i><p>{{location.properties.aliases ? location.properties.aliases.join(', ') : ''}}</p>
+    </md-content>
+    <md-content class="description" ng-if="location.properties.roomId || location.properties.category">
+        <i class="material-icons">info</i><p>
+            <span ng-if="location.properties.category">{{location.properties.category}}</span>
+            <span ng-if="location.properties.roomId">{{location.properties.roomId}}</span>
+        </p>
+    </md-content>
+    <md-content class="address" ng-if="location.properties.building || location.properties.floorName">
+        <i class="material-icons">location_city</i><p>
+            <span ng-if="location.properties.floorName">Level {{location.properties.floorName}}</span>
+            <span ng-if="location.properties.building">{{location.properties.building}}</span>
+            <span ng-if="venue.name">{{venue.name}}</span>
+        </p>
+    </md-content>
+    <md-content class="description" ng-if="location.properties.description">
+        <i class="material-icons">description</i><p>
+            {{location.properties.description}}
+        </p>
+    </md-content>
+    <md-list>
+        <md-list-item ng-show="location.properties.fields.phone && location.properties.fields.phone.value">
+            <md-icon class="material-icons">&#xE0CD;</md-icon><p class="md-subhead">{{location.properties.fields.phone.value}}</p>
+        </md-list-item>
+        <md-list-item ng-show="location.properties.fields.email && location.properties.fields.email.value">
+            <md-icon class="material-icons">&#xE0BE;</md-icon><p class="md-subhead">{{location.properties.fields.email.value}}</p>
+        </md-list-item>
+        <md-list-item ng-show="location.properties.fields.website && location.properties.fields.website.value">
+            <md-icon class="material-icons">&#xE89E;</md-icon><p class="md-subhead"><a class="md-primary" href="{{location.properties.fields.website.value}}" target="_blank">www</a></p>
+        </md-list-item>
+        <md-list-item ng-show="location.properties.fields.openinghours && location.properties.fields.openinghours.value">
+            <md-icon class="material-icons">&#xE8B5;</md-icon><p class="md-subhead">{{location.properties.fields.openinghours.value}}</p>
+        </md-list-item>
+    </md-list>
+</content>
+<footer>
+    <nav>
+        <span>
+            <md-button class="md-raised" hide-gt-sm ng-click="showOnMap()"><!--<i class="material-icons">&#xE55B;</i>--> Show on Map</md-button>
+        </span>
+        <span>
+            <md-button class="md-raised md-accent" ng-click="getRoute()"><i class="material-icons">&#xE52E;</i>Directions</md-button>
+        </span>
+    </nav>
+</footer>

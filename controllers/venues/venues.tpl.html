@@ -1,0 +1,22 @@
+<section class="venues">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <!--<i class="material-icons" ng-if="!getVenue()">&#xE7F1;</i>-->
+            <md-icon ng-if="!getVenue()">&#xE7F1;</md-icon>
+            <md-button class="md-icon-button" ng-click="back()" ng-if="getVenue()">
+                <md-icon>&#xE5C4;</md-icon>
+            </md-button>
+            <h1>Select venue</h1>
+        </div>
+    </md-toolbar>
+    <content>
+        <ul class="tiles">
+            <li class="tile" ng-repeat="venue in venues">
+                <a ng-click="setVenue(venue.id)" href="#">
+                    <img ng-src="{{venue.image}}" />
+                    <h1 class="md-title">{{venue.venueInfo.name}}</h1>
+                </a>
+            </li>
+        </ul>
+    </content>
+</section>

@@ -1,0 +1,32 @@
+﻿<div class="dir-section WALKING" ng-class="{'start': step.index === 0, 'end': step.index == (endIndex -1), 'selected': step.index == currentIndex}">
+    <span ng-if="step.index === 0 || $index === 0" class="indicator top"></span>
+    <h2 class="origin" ng-if="step.index === 0" title="{{startLabel(step.index)}}"><span class="action">Start:</span> {{startLabel(step.index)}}</h2>
+    
+    <div class="indoor" ng-if="$index === 0 && step.steps[0].abutters.toLowerCase().includes('outside')">
+        <div class="icon-container">
+            <span class="miIcon ico-exit"></span>
+        </div>
+    </div>
+    <h2 class="exit-building" ng-if="$index === 0 && step.steps[0].abutters.toLowerCase().includes('outside')" ng-bind-html="trustAsHtml(step.instructions)"></h2>
+    <div class="dots"></div>
+    <div class="instructions">
+        <div>
+            <span class="icon">
+                <md-icon>&#xE536;</md-icon>
+            </span>
+            <span class="action">Walk </span><span>{{distanceAsText(step.distance.value)}} <span ng-if="durationAsText(step.duration.value) != ''">({{durationAsText(step.duration.value)}})</span></span>
+            <div class="steps-instructions" ng-if="step.steps.length > 0">
+                <p class="expander" ng-click="toggle($index)"><span class="icon"><md-icon ng-show="expanded !== $index">&#xE313;</md-icon><md-icon ng-show="expanded === $index">&#xE316;</md-icon></span> Directions</p>
+                <div ng-show="expanded === $index">
+                    <div class="substeps" ng-repeat="substep in step.steps">
+                        <span class="adp-maneuver {{substep.maneuver}}"></span>
+                        <p ng-bind-html="trustAsHtml(substep.instructions)"></p>
+                        <span class="distance">{{substep.distance.text}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span ng-if="step.index == endIndex -1" class="indicator bottom"><span class="dot"></span></span>
+    <h2 class="destination" ng-if="step.index == endIndex -1"><span class="action">End:</span> {{endLabel(step.index)}}</h2>
+</div>
