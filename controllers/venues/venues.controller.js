@@ -64,7 +64,7 @@
         }
 
         function back() {
-            setFloorSelectorVisible(true);
+            floorSelector.show();
             $location.path(appInfo.lastVenue);
         }
     }

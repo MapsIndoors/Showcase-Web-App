@@ -342,7 +342,7 @@
                 googleMap.controls[google.maps.ControlPosition.LEFT_CENTER].getArray().find(function (item, i) {
                     if (item.id === 'mi-floor-selector') {
                         googleMap.controls[google.maps.ControlPosition.LEFT_CENTER].removeAt(i);
-                        googleMap.controls[google.maps.ControlPosition.RIGHT_CENTER].push(floorSelector);
+                        googleMap.controls[google.maps.ControlPosition.RIGHT_CENTER].push(container);
                         return item;
                     }
                 });
@@ -350,7 +350,7 @@
                 googleMap.controls[google.maps.ControlPosition.RIGHT_CENTER].getArray().find(function (item, i) {
                     if (item.id === 'mi-floor-selector') {
                         googleMap.controls[google.maps.ControlPosition.RIGHT_CENTER].removeAt(i);
-                        googleMap.controls[google.maps.ControlPosition.LEFT_CENTER].push(floorSelector);
+                        googleMap.controls[google.maps.ControlPosition.LEFT_CENTER].push(container);
                         return item;
                     }
                 });
